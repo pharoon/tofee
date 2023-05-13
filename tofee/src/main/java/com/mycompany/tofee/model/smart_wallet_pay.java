@@ -6,17 +6,16 @@ package com.mycompany.tofee.model;
 
 /**
  *
- * @author mostafa
+ * a class responsible for shopping carts and how it will be used 
+ * not available currently
  */
 public class smart_wallet_pay extends payment {
 
     public smart_wallet_pay(double amount, int voucher_id, double loy_pts_used) {
         super(amount, voucher_id, loy_pts_used);
     }
-
     @Override
     public boolean pay() {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
-    
 }

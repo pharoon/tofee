@@ -6,7 +6,7 @@ package com.mycompany.tofee.model;
 
 /**
  *
- * @author mostafa
+ * a class specialized in loose items
  */
 
 public class loose_item extends item{
@@ -14,5 +14,4 @@ public class loose_item extends item{
     public loose_item(String name, category categoryy, String description, String brand, double price, double discount_percent) {
         super(name, categoryy, description, brand, price, discount_percent);
     }
-    
 }

@@ -8,7 +8,8 @@ import java.util.Map;
 
 /**
  *
- * @author mostafa
+ * a class to define the payment option used to make two different 
+ * payment options
  */
 abstract class payment {
     protected double amount;
@@ -22,5 +23,4 @@ abstract class payment {
         this.voucher_id = voucher_id;
         this.loy_pts_used = loy_pts_used;
     }
-    
 }

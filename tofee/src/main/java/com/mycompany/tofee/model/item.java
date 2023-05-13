@@ -6,15 +6,17 @@ package com.mycompany.tofee.model;
 
 /**
  *
- * @author mostafa
+ * a class to define what is the item and used to make items
  */
 abstract class item {
+    
     protected String name;
     protected category categoryy;
     protected String description;
     protected String brand;
     protected double price;
     protected double discount_percent;
+    
     public item(String name, category categoryy, String description,
             String brand, double price, double discount_percent){
         this.name = name;

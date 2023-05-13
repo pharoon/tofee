@@ -6,7 +6,8 @@ package com.mycompany.tofee.model;
 import java.util.Date;
 /**
  *
- * @author mostafa
+ * a class to define what is a shopping cart and how it should work
+ * not available currently
  */
 public class shopping_cart {
     private account customer;

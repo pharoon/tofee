@@ -6,9 +6,11 @@ package com.mycompany.tofee.model;
 
 /**
  *
- * @author mostafa
+ * an abstract class used to make other classes with the same or more properties
+ * used to store data
  */
 abstract class account {
+    
     protected String name;
     protected int phone_num;
     protected String email;

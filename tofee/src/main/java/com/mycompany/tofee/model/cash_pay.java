@@ -6,15 +6,15 @@ package com.mycompany.tofee.model;
 
 /**
  *
- * @author mostafa
+ * a class used to define how a customer can pay in cash
  */
 public class cash_pay extends payment {
 
     public cash_pay() {
         super(0, 0,0);
     }
-        public @Override boolean pay(){
-            return true;
-        }
-        
+    
+    public @Override boolean pay(){
+        return true;
+    }
 }

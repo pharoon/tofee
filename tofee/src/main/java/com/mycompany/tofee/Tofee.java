@@ -10,21 +10,16 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
- * @author mostafa
+ *the main class where we can test and run the code
+ * 
  */
 public class Tofee {
- 
     
-
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         String str = new String("jimmy");
-
         user_acc acc1 = new user_acc("mostafa", 01111525151, "mostafa@gmail.com",
             "zzz88", "home", 10);
-
         acc1.save_user();
-
         
     }
 }
