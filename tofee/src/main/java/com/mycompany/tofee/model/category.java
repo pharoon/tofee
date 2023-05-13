@@ -10,5 +10,11 @@ import java.util.*;
  */
 public class category {
     private String name;
-    private Map<item, Integer> items;
+    private int c_id;
+
+    public category(String name, int c_id) {
+        this.name = name;
+        this.c_id = c_id;
+    }
+    
 }

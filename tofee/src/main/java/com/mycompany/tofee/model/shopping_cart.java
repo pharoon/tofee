@@ -13,5 +13,8 @@ public class shopping_cart {
     private int ID;
     private item items[];
     private Date last_access;
+
+    public shopping_cart() {
+    }
    
 }

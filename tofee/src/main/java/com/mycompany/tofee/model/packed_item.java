@@ -10,5 +10,9 @@ package com.mycompany.tofee.model;
  */
 public class packed_item extends item{
     
+    public packed_item(String name, category categoryy, String description, String brand, double price, double discount_percent) {
+        super(name, categoryy, description, brand, price, discount_percent);
+    }
+    
     
 }

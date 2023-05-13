@@ -11,9 +11,17 @@ package com.mycompany.tofee.model;
 abstract class account {
     protected String name;
     protected int phone_num;
-    protected int ID;
     protected String email;
     protected String password;
     protected String address;
-    protected double loy_pts;
+    protected int loy_pts;
+
+    public account(String name, int phone_num, String email, String password, String address, int loy_pts) {
+        this.name = name;
+        this.phone_num = phone_num;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.loy_pts = loy_pts;
+    }
 }

@@ -15,5 +15,12 @@ abstract class payment {
     protected int voucher_id;
     protected static Map<Integer, Double> items;
     protected double loy_pts_used;
-   
+    public abstract boolean pay();
+
+    public payment(double amount, int voucher_id, double loy_pts_used) {
+        this.amount = amount;
+        this.voucher_id = voucher_id;
+        this.loy_pts_used = loy_pts_used;
+    }
+    
 }

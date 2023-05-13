@@ -10,9 +10,18 @@ package com.mycompany.tofee.model;
  */
 abstract class item {
     protected String name;
-    protected category category;
+    protected category categoryy;
     protected String description;
     protected String brand;
     protected double price;
     protected double discount_percent;
+    public item(String name, category categoryy, String description,
+            String brand, double price, double discount_percent){
+        this.name = name;
+        this.categoryy = categoryy;
+        this.description = description;
+        this.brand = brand;
+        this.price = price;
+        this.discount_percent = discount_percent;
+    }
 }
