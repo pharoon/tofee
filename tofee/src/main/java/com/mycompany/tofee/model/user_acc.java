@@ -32,4 +32,8 @@ public class user_acc extends account {
             System.out.println(e.toString());
         }
     }
+
+    public String get_email() {
+        return email;
+    }
 }

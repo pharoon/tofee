@@ -6,9 +6,13 @@ package com.mycompany.tofee.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,42 +21,34 @@ import javax.swing.JOptionPane;
  */
 public class order {
     private int order_id;
-    static int counterID;
+    private Statement smt;
     private String email;
+    private state state1;
     public enum state{
         cancelled, placed, accepted, shipped, done
-    }
+    };
     private payment pay = new cash_pay();
     private String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
     private HashMap<Integer, Integer> cart;
 
-    public order(String email, enum state, HashMap<Integer, Integer> cart) {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url = "jdbc:sqlserver://localhost:1433;DatabaseName=tofee;encrypt=true;trustServerCertificate=true;";
-        Connection con = DriverManager.getConnection(url, "sa","123");
-        Statement smt = con.createStatement();
-        String sql = "SELECT MAX(order_id) from tofee";
-        ResultSet rs = smt.executeQuery(sql);
+    public order(String email, state s1, HashMap<Integer, Integer> cart, Statement smt) throws ClassNotFoundException, SQLException {
+        this.smt = smt;
+        String sql = "SELECT MAX(order_id) as res from orders";
+        ResultSet rs = this.smt.executeQuery(sql);
         if (rs.next()) {
-            this.order_id = rs.getInt() + 1;
-            ++counterID;
+            this.order_id = rs.getInt("res") + 1;
         }else{
-            this.order_id = ++counterID;
+            this.order_id = 1;
         }
         this.email = email;
-        this.state = state;
+        this.state1 = s1;
         this.cart = cart;
     }
 
     public void save_order(){
         try{
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        String url = "jdbc:sqlserver://localhost:1433;DatabaseName=tofee;encrypt=true;trustServerCertificate=true;";
-        Connection con = DriverManager.getConnection(url, "sa","123");
-        JOptionPane.showMessageDialog(null, "connection Established");
-        Statement smt = con.createStatement();
-        smt.executeUpdate("insert into orders values('"+ this.order_id +"','"+
-            this.email +"','"+ this.state.ordinal() + "')");
+        this.smt.executeUpdate("insert into orders(order_id, e_mail, s_tate) values('"+ this.order_id +"','"+
+            this.email +"','"+ this.state1.ordinal() + "')");
         }catch(Exception e){
             System.out.println(e.toString());
         }
@@ -60,13 +56,8 @@ public class order {
         
     public void save_m_order(){
         try{
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;DatabaseName=tofee;encrypt=true;trustServerCertificate=true;";
-            Connection con = DriverManager.getConnection(url, "sa","123");
-            JOptionPane.showMessageDialog(null, "connection Established");
-            Statement smt = con.createStatement();
             for (Map.Entry<Integer, Integer> i : this.cart.entrySet()) {
-                smt.executeUpdate("insert into m_order values('"+ i.getKey() +"','"+
+                this.smt.executeUpdate("insert into m_order values('"+ i.getKey() + "','" + this.order_id +"','"+
                 i.getValue() + "')");
             }
             
@@ -74,7 +65,6 @@ public class order {
             System.out.println(e.toString());
         }
     }
-    
 }
 
 
