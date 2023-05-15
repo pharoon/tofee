@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.tofee.controller;
+
 import com.mycompany.tofee.view.view;
 
 /**
@@ -22,7 +23,6 @@ import java.util.Scanner;
 import com.mycompany.tofee.view.*;
 import javax.swing.JOptionPane;
 
-
 public class controller {
     user_acc current_user;
     private view v;
@@ -39,7 +39,7 @@ public class controller {
     private void view_categories() throws Exception {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         String url = "jdbc:sqlserver://localhost:1433;DatabaseName=tofee;encrypt=true;trustServerCertificate=true;";
-        Connection con = DriverManager.getConnection(url, "sa","123");
+        Connection con = DriverManager.getConnection(url, "sa", "123");
         Statement smt = con.createStatement();
         ResultSet rs = smt.executeQuery("select * from items");
         while (rs.next()) {
@@ -54,7 +54,7 @@ public class controller {
         this.scan.nextLine();
         String mail = this.scan.nextLine();
         // check database if ID exists before
-        ResultSet rs = this.smt.executeQuery("select email from user_acc where email= " +"'" + mail +"'");
+        ResultSet rs = this.smt.executeQuery("select email from user_acc where email= " + "'" + mail + "'");
         if (rs.next()) {
             System.out.print("this email is Used befor");
             return;
@@ -87,7 +87,8 @@ public class controller {
         // check database for valid ID and pass and if yes
 
         ResultSet rs = this.smt
-                .executeQuery("select * from user_acc where email= " + "'" + mail + "'" + " and password= " + "'" + pass +"'");
+                .executeQuery("select * from user_acc where email= " + "'" + mail + "'" + " and password= " + "'" + pass
+                        + "'");
         if (rs.next()) {
             System.out.println("login succsseful");
             user_acc a = new user_acc(rs.getString("name"), rs.getInt("phone_num"),
@@ -111,12 +112,13 @@ public class controller {
             switch (input) {
                 case 1:
                     System.out.print("item: ");
-                    
+
                     int choice = this.scan.nextInt();
                     this.scan.nextLine();
                     System.out.print("Enter Quantity: ");
                     int q = this.scan.nextInt();
-                    ResultSet rs = this.smt.executeQuery("select quantity as q from items where it_id= " +"'" + choice +"'");
+                    ResultSet rs = this.smt
+                            .executeQuery("select quantity as q from items where it_id= " + "'" + choice + "'");
                     rs.next();
                     int result = rs.getInt(1);
                     if (q <= result) {
@@ -136,10 +138,19 @@ public class controller {
     }
 
     private void save_order(HashMap<Integer, Integer> C) throws ClassNotFoundException, SQLException {
-
         order o = new order(current_user.get_email(), state.placed, C, smt);
         o.save_order();
-        o.save_m_order();
+        int o_id = o.save_m_order();
+        int amount = 0;
+        for (Map.Entry<Integer, Integer> i : C.entrySet()) {
+            amount += i.getKey().get_price();
+        }
+        v.reciet_header(o_id, current_user.get_name(), current_user.get_address());
+        for (Map.Entry<Integer, Integer> i : C.entrySet()) {
+            v.reciet_body(i.getKey().get_name(), i.getValue(), i.getKey().get_price());
+        }
+        v.reciet_footer(amount);
+
     }
 
     private void user_menu() throws Exception {
@@ -173,8 +184,9 @@ public class controller {
                     break;
                 case 2:
                     current_user = login();
-                    if(current_user != null){
-                        user_menu();}
+                    if (current_user != null) {
+                        user_menu();
+                    }
                     break;
                 case 3:
                     view_categories();

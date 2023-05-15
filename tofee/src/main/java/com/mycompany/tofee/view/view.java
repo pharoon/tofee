@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.tofee.view;
+
 import com.mycompany.tofee.controller.controller;
 
 /**
@@ -40,9 +41,29 @@ public class view {
         System.out.print("choose from menu: ");
     }
 
+    public void reciet_header(int o_id, String name, String add) {
+        System.out.println("============== Receipt ==============");
+        System.out.println("Coustmer Name: " + name);
+        System.out.println("Coustmer Address: " + add);
+        System.out.println("Order-ID: " + o_id);
+    }
+
+    public void reciet_body(String name, int quantity, float price) {
+
+        System.out.println("-------------------");
+        System.out.println("Name: " + name);
+        System.out.println("Quantity: " + quantity);
+        System.out.println("Price: " + price);
+    }
+
+    public void reciet_footer(float amount) {
+        System.out.println("=====================================");
+        System.out.println("Total Amount: " + amount);
+
+    }
+
     public void viewcat_name(String n) {
         System.out.println("==============" + n + "==============");
     }
-    
 
 }
